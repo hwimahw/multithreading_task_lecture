@@ -2,8 +2,9 @@ import model.CalculateResult;
 import model.DownloadResult;
 
 import java.util.Random;
+import java.util.concurrent.Callable;
 
-public class Calculate {
+public class Calculate implements Callable<CalculateResult> {
 
     private final DownloadResult downloadResult;
 
@@ -11,8 +12,11 @@ public class Calculate {
         this.downloadResult = downloadResult;
     }
 
+    public CalculateResult call() {
+        return calculate();
+    }
 
-    public CalculateResult calculate() {
+    private CalculateResult calculate() {
         Random r = new Random();
         CalculateResult result = new CalculateResult();
         result.id = downloadResult.id;
